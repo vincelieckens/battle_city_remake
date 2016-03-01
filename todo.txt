@@ -1,0 +1,9 @@
+- Exercise 46 lpthw voltooien, dit houdt onder andere het maken van een 
+project skeleton in
+- Github repository opzetten
+- Top-down probleemanalyse maken => zie exercise 43 lpthw
+- Coden (met tests!)
+- Github repository updaten via git
+- update_sf draaien
+
+Elke keer stap 3 tot en met 6 herhalen.
