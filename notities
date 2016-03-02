@@ -38,9 +38,9 @@ Classes:
 Files:
 - get_options.py => in /bin
 - main.py
-- game_objects.py => tank, explosion and cannonball classes
+- objects.py => tank, explosion and cannonball classes
 - map.py => map, stonetile classes
-- game_over.py => game over screen class
+- exitscreen.py => game over screen class
 
 the game:
 - make the map
@@ -55,7 +55,10 @@ the game:
 Research:
 - How to use the /bin category in python projects (done)
 - Reading about argparse
+- Check python 2.7 import model 
 
-Inspiratiebronnen:
-- Al Sweigart
+Bugs:
+- Need to fix the paths to import the images 
+
+
  

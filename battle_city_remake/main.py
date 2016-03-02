@@ -3,21 +3,25 @@
 
 
 import pygame
-import game_objects
+import objects
+from pygame.locals import *
+import sys
 
-def set_globals(player1_color, player1_pos, player2_color, player2_pos):
+def set_globals():
+    global FPS, WINDOWWIDTH, WINDOWHEIGHT, TITLE, BLACK, WHITE
+    global PLAYER1_COLOR, PLAYER2_COLOR, PLAYER1_START_POS, PLAYER2_START_POS
+    
     FPS = 30
     WINDOWWIDTH = 640
     WINDOWHEIGHT = 480
     TITLE = 'Battle_city_remake'
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
-    PLAYER_1_COLOR = ""
-    PLAYER_2_COLOR = "" 
-    PLAYER1_START_POS = 0
-    PLAYER2_START_POS = 0
-    global FPS, WINDOWWIDTH, WINDOWHEIGHT, TITLE, BLACK, WHITE
-    global PLAYER1_COLOR, PLAYER2_COLOR, PLAYER1_START_POS, PLAYER2_START_POS
+    PLAYER_1_COLOR = 'green'
+    PLAYER_2_COLOR = 'grey' 
+    PLAYER1_START_POS = 'down'
+    PLAYER2_START_POS = 'up'
+
 
 def end_game():
     pygame.quit()
@@ -35,18 +39,35 @@ def main():
     background.convert()
     background.fill(BLACK)
     
-    green_tank = game_objects.Tank("green")
-    allsprites = pygame.sprite.RenderPlain((green_tank))
+    player1 = game_objects.Tank(PLAYER_1_COLOR, PLAYER_1_START_POS)
+    player2 = game_objects.Tank(PLAYER_2_COLOR, PLAYER_2_START_POS)
+    # initialize cannonball_player1
+    # initialize cannonball_player2
+    # initialize map
+    
+    allsprites = pygame.sprite.RenderPlain((player1, player2))
 
     while True:
         clock.tick(FPS)
-        
+       
         for event in pygame.event.get():
             if event.type == QUIT:
                 end_game()
-            elif event.type = K_ESCAPE:
-                end_game()
+            elif event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    end_game()
+                elif event.key == K_z:
+                    green_tank.move_up()
+                elif event.key == K_s:
+                    green_tank.move_down()
+                elif event.key == K_q:
+                    green_tank.move_left()
+                elif event.key == K_d:
+                    green_tank.move_right()
+            # elif event.type = KEYDOWN:
                 
+        # Debugging
+        print green_tank.moving    
                 
         #allsprites.update()
         screen.blit(background, (0, 0))
@@ -55,4 +76,5 @@ def main():
         
 
 if __name__ == '__main__':
+    set_globals()
     main()
