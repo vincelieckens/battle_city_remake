@@ -1,86 +1,91 @@
+#!/usr/bin/env python2
 # Tank class and cannonball class 
 
-from main import *
+import os
 import pygame
 from pygame.locals import *
-import os
-
-
-def load_image(name, color, colorkey=None):
-    fullname = os.path.join('data', 'tanks', color, name)
-    try:
-        image = pygame.image.load(fullname)
-    except pygame.error, message:
-        print 'Cannot load image:', name
-        raise SystemExit, message
-    image = image.convert()
-    if colorkey is not None:
-        if colorkey -1:
-            colorkey = image.get_at((0, 0))
-        image.set_colorkey(colorkey, RLEACCEL)
-    return image, image.get_rect()
+import resources
+import main
 
 
 class Tank(pygame.sprite.Sprite):
     
-    def __init__(self, color, start_pos):
+    def __init__(self, color, size, start_pos, screen):
         pygame.sprite.Sprite.__init__(self)
-        self.image, self.rect = load_image('Sprite_1.png', color, -1)
-        self.image = pygame.transform.scale(self.image, (50, 50))
+        self.size = size
+        self.image = resources.tank_sprites['right']
+        self.image = pygame.transform.scale(self.image, self.size)
+        self.rect = self.image.get_rect()
         if start_pos == 'down':
-            self.rect.topleft = 400, 400
+            self.rect.topleft = (400, 400)
         elif start_pos == 'up':
-            self.rect.topleft = 200, 200
-        self.rect.topleft = 200, 200
-        self.moving = 'still'
+            self.rect.topleft = (200, 200)
+        self.direction = 'still' # Tank can stand still, move right, left, up or down
         self.shooting = False
-        self.state = 'alive'
+        self.hit = True
         self.health = 3
+        self.area = screen.get_rect()
         
-    def update():
+    def update(self):
+        # Move the tank if it does not stand still
+        if self.direction != 'still':
+            self._change_image()
+            self._move()
+            self.direction = 'still'
+    
+    def _change_image(self):
+        self.image = resources.tank_sprites[self.direction]
+        self.image = pygame.transform.scale(self.image, self.size)
         
-        # Check moving state of tank, move according to this state
-        if self.moving == 'right':
-            pass
-        elif self.moving == 'left':
-            pass
-        elif self.moving == 'up':
-            pass
-        elif self.moving == 'down':
-            pass
+    def moving(self, direction):
+        if direction == 'right':
+            self.direction = 'right'
+        elif direction == 'left':
+            self.direction = 'left'
+        elif direction == 'up':
+            self.direction = 'up'
+        elif direction == 'down':
+            self.direction = 'down'     
+        
+    def _move(self, speed = 20):
+        # Check for walls or stonetiles first, abort if there are
+        self._scan_surroundings(self.direction)
+        if self.direction == 'right':
+            self.rect = self.rect.move(speed, 0)
+        elif self.direction == 'left':
+            self.rect = self.rect.move(-speed, 0)
+        elif self.direction == 'up':
+            self.rect = self.rect.move(0, -speed)
+        elif self.direction == 'down':
+            self.rect = self.rect.move(0, speed)
             
-        # Check for health, game over if health zero
+    def _scan_surroundings(self, direction):
+        x_coordinate = self.rect[0]
+        y_coordinate = self.rect[1]
+        print x_coordinate
+        print y_coordinate
+        # This function checks the surroundings of the tank for walls or stonetiles
+        # Need to change hardcoded numbers 
+        if not self.area.contains(self.rect):
+            print self.rect
+            if x_coordinate > 590 and direction == 'right':
+               self.direction = 'still'
+            elif x_coordinate < 40 and direction == 'left':
+                self.direction = 'still'
+            elif y_coordinate > 430 and direction == 'down':
+                self.direction = 'still'
+            elif y_coordinate <  40 and direction == 'up':
+                self.direction = 'still'
         
-        # if death:
-        # self.respawn
+    def fire_cannon(self):
+        self.shooting = True
         
-        # if self.shooting:
-            # shoot_cannon()
-        
-        
-    
-    # Every move function needs to check if the tank is hitting a wall or stone
-    
-    def move_left():
-        self.moving = 'left'
-    
-    def move_righ():
-        self.moving = 'right'
-        
-    def move_up():
-        self.moving = 'up'
-    
-    def move_down():
-        self.moving = 'down'
-        
-    def fire_cannon():
+    def _respawn(self):
         pass
         
-    def respawn():
-        pass
-        
-    def check_health():
-        pass
+    def _check_health(self):
+        if self.health < 0:
+            pass
     
 
 class Cannonball(pygame.sprite.Sprite):

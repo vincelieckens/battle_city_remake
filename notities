@@ -37,10 +37,12 @@ Classes:
 
 Files:
 - get_options.py => in /bin
+- resources.py => loads the sprite images 
 - main.py
 - objects.py => tank, explosion and cannonball classes
 - map.py => map, stonetile classes
 - exitscreen.py => game over screen class
+
 
 the game:
 - make the map
@@ -53,12 +55,16 @@ the game:
 
 
 Research:
+- Research colorkey
 - How to use the /bin category in python projects (done)
 - Reading about argparse
 - Check python 2.7 import model 
+- How to check the status of other objects in a method of another object?
 
-Bugs:
-- Need to fix the paths to import the images 
+Bugs/to do:
+- Need to start documenting the code
+- Need to check for style consistency
+
 
 
  
