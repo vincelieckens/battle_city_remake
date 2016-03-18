@@ -1,0 +1,70 @@
+Description of the game:
+The game is loosely based on the NES game 'Battle City', from 1985, and makes use of the sprites of this game.
+Two tanks are spawned in a corner of the map which are moved by two players. Player one makes use of the ZQSD keys to move his tank and the space key to shoot his cannon, while player two uses the arrow keys to move and the return key to shoot his cannon
+The goal of the game is to defeat the other player by depleting his three lives. Every time a player gets killed he will be spawned in a corner of the map. If a players gets killed, his tank will explode. 
+The map is loaded with stone tiles, which are destroyed when shot by a cannonball. I will make a generic map at the beginning, but eventually I will try to implement an easy random map generator. 
+The game can be started by using the command battle_city_remake COLOR1 COLOR2, where COLOR1 refers to the color of the tank of player 1, COLOR2 to the color of the tank of player 2
+
+- Tank : the tank can move freely through the map but is not able to move through stones. It can also shoot a cannonball
+- Cannonball : the cannonball, when shooten, moves in a straight line through the map, it disappears when it hits a wall of the map or hits another tank. It is also able to destroy a stone if it hits one. The tank exists of four sprites, one for each direction.
+- Map : the map consists of a combination of stone tiles, 3x3 (3 columns of stones and 3 rows of stones)
+- Stone : can be shooten by a tank. A stone tile is made up of four separate stones.
+- Wall :  tanks can't move through a wall. Cannonballs are not able to shoot through walls. These walls make up the sides of the map.
+- Health : a player has three lives, he loses one if he is shooten by the other player
+- Game over : screen that presents itself if one of the players has won. 
+- Player : there are two players, one uses the zqsd and space keys, the other the arrow and ctrl keys
+
+
+Key concepts:
+- tank
+- player 
+- health
+- game over
+- explosion
+- cannon(ball)
+- map
+- map corner
+- stonetiles
+- wall
+
+
+Classes:
+- tank : related to cannonball and stonetile, and wall, can shoot a cannonball, can't move through stone/wall
+- cannonball : related to tank, stonetile and wall
+- stonetile: consists of 4 separate stones, connected to cannonball and tank
+- map: consists of stones and walls, connected to stonetiles
+- game over screen: connected to the health of the players, it is displayed if every player has died
+
+Files:
+- get_options.py => in /bin
+- resources.py => loads the sprite images 
+- main.py
+- objects.py => tank, explosion and cannonball classes
+- map.py => map, stonetile classes
+- exitscreen.py => game over screen class
+
+
+the game:
+- make the map
+- spawn two tanks
+- main loop: 
+  *redraw background
+ *update tank, cannonball and map
+ *redraw sprites
+- display a game over screen if one of the player's lives are depleted
+
+
+Research:
+- Research colorkey
+- How to use the /bin category in python projects (done)
+- Reading about argparse
+- Check python 2.7 import model 
+- How to check the status of other objects in a method of another object?
+
+Bugs/to do:
+- Need to start documenting the code
+- Need to check for style consistency
+
+
+
+ 

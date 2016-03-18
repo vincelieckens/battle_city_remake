@@ -1,39 +1,50 @@
-# This module loads all the resources needed for the game to run
-# such as the sprite images
-
+# This module loads all the necessary resources for the game
 
 import os.path
+import os
 import pygame
+import tank
+import constants as c
 from pygame.locals import *
 
+    
+def load_tank_images_new(colors):
+	tank_images =  {}
+	
+	for color in colors:
+		tank_folder = os.path.join('tanks', color)
+		images = load_images(tank_folder)
+		tank_images[color] = images
+	
+	return tank_images
+		
 
-def load_image(filename, color, colorkey=None):
-    """ 
-    Loads the sprite of a given name, and sets the colorkey
-    for this sprite if wanted.
-    Positional arguments:
-    - name : filename of the sprite
-    - color : specify the color of the tank
-    """
-    fullname = os.path.join(os.path.expanduser('~'), 'projecten', 'games', 'battle_city_remake', 'battle_city_remake', 'data', 'tanks', color, filename)
-    try:
-        image = pygame.image.load(fullname)
-    except pygame.error, message:
-        print 'Cannot load image:', fullname
-        raise SystemExit, message
-    image = image.convert()
-    if colorkey is not None:
-        if colorkey -1:
-            colorkey = image.get_at((0, 0))
-        image.set_colorkey(colorkey, RLEACCEL)
-    return image
+def load_images(directory, colorkey=(0, 0, 0), accept=('.png', '.jpg', '.bmp')):
+	images = {}
+	
+	for img in os.listdir(os.path.join('battle_city_remake', 'data', directory)):
+		name, ext = os.path.splitext(img)
+		if ext.lower() in accept:
+			image = pygame.image.load(os.path.join('battle_city_remake', 'data', directory, img))
+			if image.get_alpha():
+				image = image.convert_alpha()
+			else:
+				image = image.convert()
+				image.set_colorkey(colorkey)
+			images[name] = image
+	return images
 
 
-def load_resources():
-    global tank_sprites
-    tank_sprite_files = ('Sprite_1.png', 'Sprite_3.png', 'Sprite_5.png', 'Sprite_7.png')
-    tank_sprites = [load_image(sprite_name, 'green') for sprite_name in tank_sprite_files]
-    tank_directions = ('up', 'left', 'down', 'right')
-    tank_sprites = dict(zip(tank_directions, tank_sprites))
+pygame.init()
+pygame.display.set_caption(c.TITLE) 
+SCREEN = pygame.display.set_mode(c.SCREEN_SIZE)   
+TANK_IMAGES = load_tank_images_new(c.COLORS)
+TILE_IMAGES = load_images('tiles')
+BULLET_IMAGES = load_images('bullets')
+
+
+# Debugging
+if __name__ == '__main__':
+	print TILE_IMAGES
 
 
