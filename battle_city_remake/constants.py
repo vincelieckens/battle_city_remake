@@ -14,3 +14,7 @@ COLORS = (GREEN, GREY, YELLOW, PURPLE)
 
 SCREEN_SIZE = (800, 600)
 TITLE = 'Battle City Remake'
+
+BLACK = (0, 0, 0)
+
+QUIT = 'quit'

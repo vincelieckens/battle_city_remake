@@ -26,7 +26,7 @@ def load_tank_images_new(colors_folders):
 	return tank_images
 		
 
-def load_images(directory, colorkey=(0, 0, 0), accept=('.png', '.jpg', '.bmp')):
+def load_images(directory, colorkey=c.BLACK, accept=('.png', '.jpg', '.bmp')):
 	"""
 	This function loads all the images in a specified directory, 
 	transforms these images according to the given colorkey, which
@@ -35,10 +35,10 @@ def load_images(directory, colorkey=(0, 0, 0), accept=('.png', '.jpg', '.bmp')):
 	"""
 	images = {}
 	
-	for img in os.listdir(os.path.join('battle_city_remake', 'data', directory)):
+	for img in os.listdir(os.path.join('data', directory)):
 		name, ext = os.path.splitext(img)
 		if ext.lower() in accept:
-			image = pygame.image.load(os.path.join('battle_city_remake', 'data', directory, img))
+			image = pygame.image.load(os.path.join('data', directory, img))
 			if image.get_alpha():
 				image = image.convert_alpha()
 			else:
@@ -48,9 +48,8 @@ def load_images(directory, colorkey=(0, 0, 0), accept=('.png', '.jpg', '.bmp')):
 	return images
 
 
-pygame.init()
-pygame.display.set_caption(c.TITLE) 
-SCREEN = pygame.display.set_mode(c.SCREEN_SIZE)   
+SCREEN = pygame.display.set_mode(c.SCREEN_SIZE)
+pygame.display.set_caption(c.TITLE)   
 TANK_IMAGES = load_tank_images_new(c.COLORS)
 TILE_IMAGES = load_images('tiles')
 BULLET_IMAGES = load_images('bullets')
