@@ -1,0 +1,64 @@
+----------------------Files--------------------------------
+
+- main.py : module used to call the main game loop
+- game.py : consists of a Game class that handles the states of the games
+- tank.py : this file holds the tank class
+- bullet.py : this file holds the cannonball class
+- explosion.py : this file holds the explosion class
+- stonetile.py : this file holds the stonetile class
+- map.py : this file holds the map class
+- constants.py : thile consists of all the constant variables necessary for the game
+- resources.py : this file holds functions which are used to load images
+- text.py : this module consists of textclasses, such as the game over screen
+
+----------------------Classes------------------------------
+
+- Game
+constructor function
+
+- Tank
+constructor function:
+
+- Bullet
+constructor function
+
+- Explosion
+constructor function
+
+- Stonetile
+constructor function
+
+- Map 
+constructor function
+
+- Infoscreen
+constructor function
+
+- Score
+constructor function
+
+- Gameoverscreen
+constructor function
+
+
+------------------------Functions---------------------------
+
+main.py
+- main() : main game loop
+
+resources.py
+- load_tank_images(filenames, color) : loads all the tank images and stores it as a dictionary. Filenames arguments accepts a list/tuple with the filenames. The second argument is the color of the tank images that need to be loaded.
+- load_image(filename) : returns an image based on the filename
+- load_resources() : loads all the resources as global variables, to be called in main.py
+
+
+-------------------------Research-------------------------------
+
+- Colorkey
+- How do packages/import statements work in python 2.7
+- Need to make explosions datastructure / find out how they work
+
+----------------------Main loop--------------------------------
+- Initialize pygame
+- Initialize resources
+- Call the main game loop
