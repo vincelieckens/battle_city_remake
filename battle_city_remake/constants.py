@@ -13,7 +13,7 @@ YELLOW = 'yellow'
 PURPLE = 'purple'
 COLORS = (GREEN, GREY, YELLOW, PURPLE)
 
-SCREEN_SIZE = (800, 600)
+SCREEN_SIZE = (864, 624)
 TITLE = 'Battle City Remake'
 
 BLACK = (0, 0, 0)

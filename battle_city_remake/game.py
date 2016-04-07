@@ -18,8 +18,8 @@ class Game(object):
         self.background.convert()
         self.background.fill(c.BLACK)
         self.clock = pygame.time.Clock()
-        self.fps = 60
-        self.current_level = level.Level()
+        self.fps = 30
+        self.current_level = level.Level(self.screen)
     
     def event_loop(self):
         # Some events are needed in every state of the game, such as quitting the
