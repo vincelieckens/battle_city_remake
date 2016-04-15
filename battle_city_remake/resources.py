@@ -26,7 +26,7 @@ def load_tank_images_new(colors_folders):
     return tank_images
         
 
-def load_images(directory, colorkey=c.BLACK, size = 3, accept=('.png', '.jpg', '.bmp')):
+def load_images(directory, colorkey=c.COLORKEY, accept=('.png', '.jpg', '.bmp')):
     """
     This function loads all the images in a specified directory, 
     transforms these images according to the given colorkey, which
@@ -41,26 +41,12 @@ def load_images(directory, colorkey=c.BLACK, size = 3, accept=('.png', '.jpg', '
         
         if ext.lower() in accept:
             image = pygame.image.load(os.path.join('data', directory, img))
-            if image.get_alpha():
-                image = image.convert_alpha()
-            else:
-                image = image.convert()
-                image.set_colorkey(colorkey)
-            expanded_image = pygame.transform.scale(image, (image.get_width() * size, image.get_height() * size))
+            image = image.convert()
+            colorkey = image.get_at((0, 0))
+            image.set_colorkey((0, 0, 1, 255))
+            expanded_image = pygame.transform.scale(image, (48, 48))
             images[name] = expanded_image
     
     return images
-
-
-SCREEN = pygame.display.set_mode(c.SCREEN_SIZE)
-pygame.display.set_caption(c.TITLE)   
-TANK_IMAGES = load_tank_images_new(c.COLORS)
-TILE_IMAGES = load_images('tiles', size = 1)
-BULLET_IMAGES = load_images('bullets')
-
-
-# Debugging
-if __name__ == '__main__':
-    print TILE_IMAGES
 
 

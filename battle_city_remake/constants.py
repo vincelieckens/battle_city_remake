@@ -1,6 +1,3 @@
-# This module stores all the necessary global/constant variables
-
-
 LEFT = 'left'
 RIGHT = 'right'
 DOWN = 'down'
@@ -13,10 +10,12 @@ YELLOW = 'yellow'
 PURPLE = 'purple'
 COLORS = (GREEN, GREY, YELLOW, PURPLE)
 
-SCREEN_SIZE = (864, 624)
+SCREEN_SIZE = (864, 628)
 TITLE = 'Battle City Remake'
 
 BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+COLORKEY = (0, 82, 0)
 
 PLAYING = 'playing'
 QUIT = 'quit'
